@@ -9,9 +9,4 @@ class Battle : public Module {
     void cleanup();
 };
 
-static Module *GetBattle()
-{
-    return new Battle();
-}
-
 }

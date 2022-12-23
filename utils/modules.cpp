@@ -64,10 +64,10 @@ void ModulesRequestStop()
 }
 
 void ModulesSlotsInsert
-(const char *name, void *data)
+(const char *name, void *data, void (* dealloc)(void *))
 {
     assert(name != NULL);
-    _slots.Insert(name, data);
+    _slots.Insert(name, data, dealloc);
 }
 
 void *ModulesSlotsGet

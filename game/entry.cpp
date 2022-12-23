@@ -10,8 +10,8 @@ int Entry
     (void)argv;
 
     std::list<ModuleDef> defs = {
-        {"Raylib", GetRaylib},
-        {"Battle", GetBattle},
+        ModuleDef_StaticInitializer(Raylib),
+        ModuleDef_StaticInitializer(Battle),
     };
 
     ModulesInit(defs);

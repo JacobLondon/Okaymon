@@ -8,12 +8,14 @@ namespace Okay {
 struct Slot {
     const char *name;
     void *data;
+    void (* dealloc)(void *);
 };
 
 class Slots {
 public:
     Slots();
     void Insert(const char *name, void *data);
+    void Insert(const char *name, void *data, void (* dealloc)(void *));
     void *Get(const char *name);
     void Clear();
 private:

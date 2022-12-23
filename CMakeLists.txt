@@ -24,3 +24,9 @@ install(
     TARGETS okay
     DESTINATION usr/bin
 )
+
+file(COPY assets DESTINATION ${CMAKE_BINARY_DIR})
+install(
+    DIRECTORY assets
+    DESTINATION var/${PROJECT_NAME}
+)
