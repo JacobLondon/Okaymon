@@ -15,10 +15,8 @@ client(client)
 {
 }
 
-Eventloop::Eventloop
-(size_t period_millis):
-period_millis(period_millis),
-target_millis(0),
+Eventloop::Eventloop():
+done(false),
 events{}
 {
 }
@@ -32,7 +30,7 @@ void Eventloop::Subscribe
 void Eventloop::Unsubscribe
 (const char *name)
 {
-    events.remove_if([&](Event a){
+    events.remove_if([&](Event& a){
         return strcmp(a.name, name) == 0;
     });
 }
@@ -53,28 +51,30 @@ void Eventloop::Resume
     e->paused = false;
 }
 
-void loop(std::list<Event>& events)
-{
-    for (auto& event : events) {
-        event.cb(event, event.client);
-    }
-}
-
 void Eventloop::LoopOnce()
 {
     const size_t now = TimeNowMillis();
-    if ((now - target_millis) >= period_millis) {
-        target_millis = now;
-        loop(events);
+    for (auto& event : events) {
+        if (event.paused) continue;
+        if ((now - event.last_milliseconds) < event.milliseconds) continue;
+        event.cb(event, event.client);
     }
+
+    events.remove_if([](Event& a){
+        return !a.again;
+    });
 }
 
 void Eventloop::Loop()
 {
-    while (true) {
+    while (!done) {
         LoopOnce();
-        TimeSleepMillis(2);
     }
+}
+
+void Eventloop::Stop()
+{
+    done = true;
 }
 
 Event *Eventloop::find

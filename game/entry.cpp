@@ -3,7 +3,9 @@
 
 namespace Okay {
 
-int Entry(int argc, char **argv) {
+int Entry
+(int argc, char **argv)
+{
     (void)argc;
     (void)argv;
 

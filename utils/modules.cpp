@@ -9,7 +9,8 @@ static std::list<Module *> _modules;
 static std::list<const char *> _loaded;
 
 void ModulesInit
-(std::list<ModuleDef>& defs) {
+(std::list<ModuleDef>& defs)
+{
     _eventloop = new Eventloop();
 
     for (auto& def : defs) {
@@ -20,7 +21,8 @@ void ModulesInit
     }
 }
 
-void ModulesCleanup() {
+void ModulesCleanup()
+{
     for (auto& module : _modules) {
         module->cleanup();
     }
@@ -30,16 +32,19 @@ void ModulesCleanup() {
     _loaded.clear();
 }
 
-void ModulesLoop() {
+void ModulesLoop()
+{
     _eventloop->Loop();
 }
 
-Eventloop *ModulesGetEventloop() {
+Eventloop *ModulesGetEventloop()
+{
     assert(_eventloop != NULL);
     return _eventloop;
 }
 
-bool ModulesLoaded(const char *name) {
+bool ModulesLoaded(const char *name)
+{
     if (!name) return false;
     for (auto& loaded_name : _loaded) {
         if (strcmp(name, loaded_name) == 0) {
@@ -47,6 +52,12 @@ bool ModulesLoaded(const char *name) {
         }
     }
     return false;
+}
+
+void ModulesRequestStop()
+{
+    assert(_eventloop != NULL);
+    _eventloop->Stop();
 }
 
 }

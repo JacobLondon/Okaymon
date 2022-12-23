@@ -9,7 +9,8 @@ class Battle : public Module {
     void cleanup();
 };
 
-static Module *GetBattle() {
+static Module *GetBattle()
+{
     return new Battle();
 }
 

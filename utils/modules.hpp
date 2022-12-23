@@ -20,6 +20,8 @@ void ModulesInit(std::list<ModuleDef>& defs);
 void ModulesLoop();
 void ModulesCleanup();
 
+void ModulesRequestStop();
+
 Eventloop *ModulesGetEventloop();
 bool ModulesLoaded(const char *name);
 

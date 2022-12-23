@@ -9,7 +9,8 @@ class Raylib : public Module {
     void cleanup();
 };
 
-static Module *GetRaylib() {
+static Module *GetRaylib()
+{
     return new Raylib();
 }
 

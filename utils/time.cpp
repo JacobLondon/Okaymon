@@ -27,12 +27,14 @@ size_t TimeNowSecs()
     return TimeNowNanos() / 1'000'000'000ull;
 }
 
-void TimeSleepMicros(size_t count)
+void TimeSleepMicros
+(size_t count)
 {
     (void)usleep(count);
 }
 
-void TimeSleepMillis(size_t count)
+void TimeSleepMillis
+(size_t count)
 {
     (void)usleep(count * 1'000ull);
 }
