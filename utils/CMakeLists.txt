@@ -3,6 +3,8 @@ set(util_source_files
     eventloop.hpp
     modules.cpp
     modules.hpp
+    slots.cpp
+    slots.hpp
     time.cpp
     time.hpp
 )

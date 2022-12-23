@@ -24,5 +24,7 @@ void ModulesRequestStop();
 
 Eventloop *ModulesGetEventloop();
 bool ModulesLoaded(const char *name);
+void ModulesSlotsInsert(const char *name, void *data);
+void *ModulesSlotsGet(const char *name);
 
 }

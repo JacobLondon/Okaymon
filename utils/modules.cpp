@@ -1,9 +1,11 @@
 #include "modules.hpp"
+#include "slots.hpp"
 #include <list>
 #include <assert.h>
 
 namespace Okay {
 
+static Slots _slots;
 static Eventloop *_eventloop;
 static std::list<Module *> _modules;
 static std::list<const char *> _loaded;
@@ -30,6 +32,7 @@ void ModulesCleanup()
     delete _eventloop;
     _modules.clear();
     _loaded.clear();
+    _slots.Clear();
 }
 
 void ModulesLoop()
@@ -58,6 +61,20 @@ void ModulesRequestStop()
 {
     assert(_eventloop != NULL);
     _eventloop->Stop();
+}
+
+void ModulesSlotsInsert
+(const char *name, void *data)
+{
+    assert(name != NULL);
+    _slots.Insert(name, data);
+}
+
+void *ModulesSlotsGet
+(const char *name)
+{
+    assert(name != NULL);
+    return _slots.Get(name);
 }
 
 }
