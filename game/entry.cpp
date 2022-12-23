@@ -1,6 +1,5 @@
-#include <utils/modules.hpp>
-#include "battle.hpp"
-#include <raylib.h>
+#include "mod_battle.hpp"
+#include "mod_raylib.hpp"
 
 namespace Okay {
 
@@ -9,6 +8,7 @@ int Entry(int argc, char **argv) {
     (void)argv;
 
     std::list<ModuleDef> defs = {
+        {"Raylib", GetRaylib},
         {"Battle", GetBattle},
     };
 

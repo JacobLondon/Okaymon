@@ -1,8 +1,10 @@
 set(game_source_files
-    battle.cpp
-    battle.hpp
     entry.cpp
     entry.hpp
+    mod_battle.cpp
+    mod_battle.hpp
+    mod_raylib.cpp
+    mod_raylib.hpp
 )
 
 add_library(game ${game_source_files})
