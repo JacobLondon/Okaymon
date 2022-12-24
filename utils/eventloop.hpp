@@ -30,6 +30,7 @@ public:
     void Loop();
     void LoopOnce();
     void Stop();
+    void Stop(const char *name);
 private:
     bool done;
     std::list<Event> events;

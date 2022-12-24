@@ -18,6 +18,11 @@ void Move::Activate
 
     TraceLog(LOG_INFO, "%s used %s! %s took %d damage!",
         self.name, name, other.name, damage);
+    
+    if (other.health <= 0) {
+        other.health = 0;
+        TraceLog(LOG_INFO, "%s fainted!", other.name);
+    }
 }
 
 }

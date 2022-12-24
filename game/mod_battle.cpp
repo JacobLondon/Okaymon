@@ -12,13 +12,18 @@ void ModBattle::init()
     Assert(ModulesLoaded("ModRaylib"));
     Assert(ModulesLoaded("ModOkaymon"));
 
-    Eventloop *e = ModulesGetEventloop();
-    e->Subscribe("Battle", update, NULL, 0);
+    ModulesSubscribe("ModBattle.Update", update, NULL, 0);
 }
 
 void ModBattle::cleanup()
 {
 
+}
+
+static void end_encounter()
+{
+    ModulesResume("ModWorld.Update");
+    ModulesPause("ModBattle.Update");
 }
 
 static void update
@@ -27,14 +32,21 @@ static void update
     (void)e;
     (void)client;
 
+    if (IsKeyPressed(KEY_R)) {
+        end_encounter();
+    }
+
     BeginDrawing();
     ClearBackground(RAYWHITE);
 
-    auto *mudkip = (Okaymon *)ModulesSlotsGet("Okaymon.Mudkip");
-    auto *vaporeon = (Okaymon *)ModulesSlotsGet("Okaymon.Vaporeon");
+    auto myself = (const char *)ModulesSlotsGetRequired("ModBattle.Input.Self");
+    auto myopponent = (const char *)ModulesSlotsGetRequired("ModBattle.Input.Other");
 
-    mudkip->Draw(0.1, 0.6);
-    vaporeon->Draw(0.7, 0.1);
+    auto self = (Okaymon *)ModulesSlotsGet(myself);
+    auto opponent = (Okaymon *)ModulesSlotsGet(myopponent);
+
+    self->Draw(0.1, 0.6);
+    opponent->Draw(0.7, 0.1);
 
     EndDrawing();
 }

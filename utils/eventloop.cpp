@@ -77,6 +77,14 @@ void Eventloop::Stop()
     done = true;
 }
 
+void Eventloop::Stop
+(const char *name)
+{
+    Event *e = find(name);
+    if (!e) return;
+    e->again = false;
+}
+
 Event *Eventloop::find
 (const char *name)
 {

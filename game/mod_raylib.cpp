@@ -39,8 +39,7 @@ static void load_pngs_into_slots()
 
 void ModRaylib::init()
 {
-    Eventloop *e = ModulesGetEventloop();
-    e->Subscribe("Update", update, NULL, 1);
+    ModulesSubscribe("ModRaylib.Update", update, NULL, 1);
 
     InitWindow(1080, 720, "Okay");
     SetTargetFPS(60);

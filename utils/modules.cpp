@@ -87,4 +87,32 @@ void *ModulesSlotsGetRequired
     return p;
 }
 
+void ModulesPause(const char *name)
+{
+    Assert(_eventloop != NULL);
+    _eventloop->Pause(name);
+}
+
+void ModulesResume(const char *name)
+{
+    Assert(_eventloop != NULL);
+    _eventloop->Resume(name);
+}
+
+void ModulesSubscribe
+(const char *name, Okay::EventCb cb, void *client, size_t milliseconds)
+{
+    Assert(name != NULL);
+    Assert(_eventloop != NULL);
+    _eventloop->Subscribe(name, cb, client, milliseconds);
+}
+
+void ModulesUnsubscribe
+(const char *name)
+{
+    Assert(name != NULL);
+    Assert(_eventloop != NULL);
+    _eventloop->Unsubscribe(name);
+}
+
 }

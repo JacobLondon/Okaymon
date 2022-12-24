@@ -9,6 +9,8 @@ set(game_source_files
     mod_okaymon.hpp
     mod_raylib.cpp
     mod_raylib.hpp
+    mod_world.cpp
+    mod_world.hpp
     moves.cpp
     moves.hpp
     okaymon.cpp

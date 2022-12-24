@@ -35,4 +35,10 @@ void ModulesSlotsInsert(const char *name, void *data, void (* dealloc)(void *));
 void *ModulesSlotsGet(const char *name);
 void *ModulesSlotsGetRequired(const char *name);
 
+void ModulesPause(const char *name);
+void ModulesResume(const char *name);
+
+void ModulesSubscribe(const char *name, Okay::EventCb cb, void *client, size_t milliseconds);
+void ModulesUnsubscribe(const char *name);
+
 }
