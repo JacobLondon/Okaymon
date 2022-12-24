@@ -14,19 +14,19 @@ static FilePathList assets;
 
 static void load_pngs_into_slots()
 {
-    assert(DirectoryExists(ASSETS_DIR));
+    Assert(DirectoryExists(ASSETS_DIR));
 
     assets = LoadDirectoryFiles(ASSETS_DIR);
 
     for (size_t i = 0; i < assets.count; i++) {
         char *path = assets.paths[i];
-        assert(path != NULL);
+        Assert(path != NULL);
         if (!IsFileExtension(path, ".png")) continue;
 
         // save all pngs into slots by path name
         Texture2D texture = LoadTexture(path);
         auto texturep = (Texture2D *)MemAlloc(sizeof(texture));
-        assert(texturep != NULL);
+        Assert(texturep != NULL);
         memcpy(texturep, &texture, sizeof(*texturep));
 
         ModulesSlotsInsert(path, texturep, [](void *_a){
@@ -37,7 +37,7 @@ static void load_pngs_into_slots()
     }
 }
 
-void Raylib::init()
+void ModRaylib::init()
 {
     Eventloop *e = ModulesGetEventloop();
     e->Subscribe("Update", update, NULL, 1);
@@ -51,7 +51,7 @@ void Raylib::init()
     (void)signal(SIGINT, interrupt);
 }
 
-void Raylib::cleanup()
+void ModRaylib::cleanup()
 {
     UnloadDirectoryFiles(assets);
     CloseWindow();

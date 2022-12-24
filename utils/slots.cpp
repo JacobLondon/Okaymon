@@ -1,4 +1,5 @@
 #include "slots.hpp"
+#include "misc.hpp"
 
 namespace Okay {
 
@@ -16,7 +17,7 @@ void Slots::Insert
 void Slots::Insert
 (const char *name, void *data, void (* dealloc)(void *))
 {
-    assert(name != NULL);
+    Assert(name != NULL);
     Slot slot{name, data, dealloc};
     slots.insert_or_assign(name, slot);
 }
@@ -24,7 +25,7 @@ void Slots::Insert
 void *Slots::Get
 (const char *name)
 {
-    assert(name != NULL);
+    Assert(name != NULL);
     auto got = slots.find(name);
     if (got == slots.end()) {
         return NULL;

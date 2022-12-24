@@ -1,6 +1,8 @@
 set(util_source_files
     eventloop.cpp
     eventloop.hpp
+    misc.cpp
+    misc.hpp
     modules.cpp
     modules.hpp
     slots.cpp

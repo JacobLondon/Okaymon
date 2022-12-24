@@ -5,7 +5,7 @@
 
 namespace Okay {
 
-class Raylib : public Module {
+class ModRaylib : public Module {
     void init();
     void cleanup();
 };

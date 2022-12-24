@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include "eventloop.hpp"
+#include "misc.hpp"
 
 namespace Okay {
 
@@ -32,5 +33,6 @@ Eventloop *ModulesGetEventloop();
 bool ModulesLoaded(const char *name);
 void ModulesSlotsInsert(const char *name, void *data, void (* dealloc)(void *));
 void *ModulesSlotsGet(const char *name);
+void *ModulesSlotsGetRequired(const char *name);
 
 }

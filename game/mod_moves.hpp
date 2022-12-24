@@ -4,7 +4,7 @@
 
 namespace Okay {
 
-class ModBattle : public Module {
+class ModMoves : public Module {
     void init();
     void cleanup();
 };

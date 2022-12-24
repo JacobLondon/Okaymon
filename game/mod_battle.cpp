@@ -1,24 +1,22 @@
 #include <utils/modules.hpp>
 #include "mod_battle.hpp"
+#include "okaymon.hpp"
 #include <raylib.h>
 
 namespace Okay {
 
 static void update(Event& e, void *client);
 
-static Texture2D *mudkip;
-
-void Battle::init()
+void ModBattle::init()
 {
-    assert(ModulesLoaded("Raylib"));
+    Assert(ModulesLoaded("ModRaylib"));
+    Assert(ModulesLoaded("ModOkaymon"));
 
     Eventloop *e = ModulesGetEventloop();
-    e->Subscribe("Battle", update, NULL, 16);
-
-    mudkip = (Texture2D *)ModulesSlotsGet("assets/mudkip.png");
+    e->Subscribe("Battle", update, NULL, 0);
 }
 
-void Battle::cleanup()
+void ModBattle::cleanup()
 {
 
 }
@@ -31,7 +29,13 @@ static void update
 
     BeginDrawing();
     ClearBackground(RAYWHITE);
-    DrawTexture(*mudkip, 0, 0, WHITE);
+
+    auto *mudkip = (Okaymon *)ModulesSlotsGet("Okaymon.Mudkip");
+    auto *vaporeon = (Okaymon *)ModulesSlotsGet("Okaymon.Vaporeon");
+
+    mudkip->Draw(0.1, 0.6);
+    vaporeon->Draw(0.7, 0.1);
+
     EndDrawing();
 }
 

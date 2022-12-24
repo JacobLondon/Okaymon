@@ -3,8 +3,16 @@ set(game_source_files
     entry.hpp
     mod_battle.cpp
     mod_battle.hpp
+    mod_moves.cpp
+    mod_moves.hpp
+    mod_okaymon.cpp
+    mod_okaymon.hpp
     mod_raylib.cpp
     mod_raylib.hpp
+    moves.cpp
+    moves.hpp
+    okaymon.cpp
+    okaymon.hpp
 )
 
 add_library(game ${game_source_files})

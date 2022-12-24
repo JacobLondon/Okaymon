@@ -1,7 +1,9 @@
 #include "modules.hpp"
 #include "slots.hpp"
+#include "misc.hpp"
 #include <list>
 #include <assert.h>
+#include <raylib.h>
 
 namespace Okay {
 
@@ -42,7 +44,7 @@ void ModulesLoop()
 
 Eventloop *ModulesGetEventloop()
 {
-    assert(_eventloop != NULL);
+    Assert(_eventloop != NULL);
     return _eventloop;
 }
 
@@ -59,22 +61,30 @@ bool ModulesLoaded(const char *name)
 
 void ModulesRequestStop()
 {
-    assert(_eventloop != NULL);
+    Assert(_eventloop != NULL);
     _eventloop->Stop();
 }
 
 void ModulesSlotsInsert
 (const char *name, void *data, void (* dealloc)(void *))
 {
-    assert(name != NULL);
+    Assert(name != NULL);
     _slots.Insert(name, data, dealloc);
 }
 
 void *ModulesSlotsGet
 (const char *name)
 {
-    assert(name != NULL);
+    Assert(name != NULL);
     return _slots.Get(name);
+}
+
+void *ModulesSlotsGetRequired
+(const char *name)
+{
+    void *p = ModulesSlotsGet(name);
+    TraceAssert(p != NULL, "Module: Cannot get slot: %s", name);
+    return p;
 }
 
 }
