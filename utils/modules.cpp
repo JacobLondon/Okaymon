@@ -79,6 +79,7 @@ void *ModulesSlotsGet
 void *ModulesSlotsGetRequired
 (const char *name)
 {
+    Assert(name != NULL);
     void *p = ModulesSlotsGet(name);
     TraceAssert(p != NULL, "Module: Cannot get slot: %s", name);
     return p;
@@ -87,13 +88,22 @@ void *ModulesSlotsGetRequired
 void ModulesPause(const char *name)
 {
     Assert(_eventloop != NULL);
+    Assert(name != NULL);
     _eventloop->Pause(name);
 }
 
 void ModulesResume(const char *name)
 {
+    Assert(name != NULL);
     Assert(_eventloop != NULL);
     _eventloop->Resume(name);
+}
+
+bool ModulesIsPaused(const char *name)
+{
+    Assert(name != NULL);
+    Assert(_eventloop != NULL);
+    return _eventloop->IsPaused(name);
 }
 
 void ModulesTimeoutSubscribe

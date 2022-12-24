@@ -25,11 +25,13 @@ void Writer::Begin
     string = _string;
 }
 
-void Writer::Next()
+void Writer::Next(bool force)
 {
     size_t now = TimeNowMillis();
-    if ((now - last_char_milliseconds) < MILLIS_PER_CHAR) {
-        return;
+    if (!force) {
+        if ((now - last_char_milliseconds) < MILLIS_PER_CHAR) {
+            return;
+        }
     }
     last_char_milliseconds = now;
 
@@ -60,6 +62,13 @@ void Writer::Clear()
     ndx = 0;
     message.clear();
     string.clear();
+}
+
+void Writer::Finish()
+{
+    while (!Done()) {
+        Next(true);
+    }
 }
 
 }

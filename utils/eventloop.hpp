@@ -27,6 +27,7 @@ public:
     void Unsubscribe(const char *name);
     void Pause(const char *name);
     void Resume(const char *name);
+    bool IsPaused(const char *name);
     void Loop();
     void LoopOnce();
     void Stop();

@@ -37,6 +37,7 @@ void *ModulesSlotsGetRequired(const char *name);
 
 void ModulesPause(const char *name);
 void ModulesResume(const char *name);
+bool ModulesIsPaused(const char *name);
 
 void ModulesTimeoutSubscribe(const char *name, EventCb cb, void *client, size_t milliseconds);
 void ModulesTimeoutUnsubscribe(const char *name);

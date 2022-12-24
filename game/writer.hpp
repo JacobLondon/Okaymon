@@ -9,10 +9,11 @@ class Writer {
 public:
     Writer();
     void Begin(std::string& string);
-    void Next();
+    void Next(bool force = false);
     const char *Get();
     bool Done();
     void Clear();
+    void Finish();
 
 private:
     size_t last_char_milliseconds;

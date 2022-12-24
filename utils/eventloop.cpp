@@ -1,6 +1,6 @@
 #include "eventloop.hpp"
 #include "time.hpp"
-#include <assert.h>
+#include "misc.hpp"
 
 namespace Okay {
 
@@ -30,6 +30,7 @@ void Eventloop::Subscribe
 void Eventloop::Unsubscribe
 (const char *name)
 {
+    Assert(name != NULL);
     events.remove_if([&](Event& a){
         return strcmp(a.name, name) == 0;
     });
@@ -38,6 +39,7 @@ void Eventloop::Unsubscribe
 void Eventloop::Pause
 (const char *name)
 {
+    Assert(name != NULL);
     Event *e = find(name);
     if (!e) return;
     e->paused = true;
@@ -46,9 +48,19 @@ void Eventloop::Pause
 void Eventloop::Resume
 (const char *name)
 {
+    Assert(name != NULL);
     Event *e = find(name);
     if (!e) return;
     e->paused = false;
+}
+
+bool Eventloop::IsPaused
+(const char *name)
+{
+    Assert(name != NULL);
+    Event *e = find(name);
+    if (!e) return false;
+    return e->paused;
 }
 
 void Eventloop::LoopOnce()
@@ -80,6 +92,7 @@ void Eventloop::Stop()
 void Eventloop::Stop
 (const char *name)
 {
+    Assert(name != NULL);
     Event *e = find(name);
     if (!e) return;
     e->again = false;
@@ -88,7 +101,7 @@ void Eventloop::Stop
 Event *Eventloop::find
 (const char *name)
 {
-    assert(name != NULL);
+    Assert(name != NULL);
 
     for (auto& event : events) {
         if (strcmp(event.name, name) == 0) {

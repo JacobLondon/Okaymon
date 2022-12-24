@@ -61,41 +61,51 @@ static void update
     switch (state)
     {
     case 0:
-        writer.Begin(queue.back());
-
         pause();
-        state = 1;
+        state++;
         break;
     case 1:
+        writer.Begin(queue.front());
+        state++;
+        break;
+    case 2:
     {
         writer.Next();
+        if (IsKeyPressed(KEY_SPACE)) {
+            writer.Finish();
+        }
+
         write_now();
 
         if (writer.Done()) {
-            state = 2;
+            state++;
         }
 
         wait = TimeNowMillis();
         break;
     }
-    case 2:
+    case 3:
     {
         size_t now = TimeNowMillis();
         if ((now - wait) >= 1000) {
-            state = 3;
+            state++;
         }
 
         write_now();
         break;
     }
-    case 3:
+    case 4:
         write_now();
         queue.pop();
-        resume();
-        state = 0;
+        state = 1;
         break;
     default:
         break;
+    }
+
+    if (queue.empty()) {
+        resume();
+        state = 0;
     }
 }
 
@@ -106,16 +116,26 @@ static void notify
     queue.emplace(message);
 }
 
+static bool paused_battle;
+static bool paused_world;
 static void pause()
 {
+    paused_battle = ModulesIsPaused("ModBattle.Update");
+    paused_world = ModulesIsPaused("ModWorld.Update");
+
     ModulesPause("ModBattle.Update");
     ModulesPause("ModWorld.Update");
 }
 
 static void resume()
 {
-    ModulesResume("ModBattle.Update");
-    ModulesResume("ModWorld.Update");
+    // only resume the module which wasn't already paused
+    if (!paused_battle) {
+        ModulesResume("ModBattle.Update");
+    }
+    if (!paused_world) {
+        ModulesResume("ModWorld.Update");
+    }
 }
 
 }
