@@ -1,5 +1,5 @@
 #include <utils/modules.hpp>
-#include "mod_okaymon.hpp"
+#include "mod.hpp"
 #include "okaymon.hpp"
 
 namespace Okay {

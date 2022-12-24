@@ -1,5 +1,5 @@
 #include <raylib.h>
-#include "mod_world.hpp"
+#include "mod.hpp"
 #include <utils/modules.hpp>
 
 namespace Okay {
@@ -12,7 +12,7 @@ void ModWorld::init()
     Assert(ModulesLoaded("ModBattle"));
 
     ModulesPause("ModBattle.Update");
-    ModulesSubscribe("ModWorld.Update", update, NULL, 0);
+    ModulesTimeoutSubscribe("ModWorld.Update", update, NULL, 0);
 }
 
 void ModWorld::cleanup()

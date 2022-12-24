@@ -5,6 +5,8 @@ set(util_source_files
     misc.hpp
     modules.cpp
     modules.hpp
+    nexus.cpp
+    nexus.hpp
     slots.cpp
     slots.hpp
     time.cpp

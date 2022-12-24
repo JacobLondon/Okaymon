@@ -1,7 +1,10 @@
 #include <utils/modules.hpp>
-#include "mod_raylib.hpp"
-#include <raylib.h>
+#include "mod.hpp"
 #include <signal.h>
+
+#include <raylib.h>
+#define RAYGUI_IMPLEMENTATION
+#include <raygui.h>
 
 namespace Okay {
 
@@ -39,7 +42,7 @@ static void load_pngs_into_slots()
 
 void ModRaylib::init()
 {
-    ModulesSubscribe("ModRaylib.Update", update, NULL, 1);
+    ModulesTimeoutSubscribe("ModRaylib.Update", update, NULL, 1);
 
     InitWindow(1080, 720, "Okay");
     SetTargetFPS(60);

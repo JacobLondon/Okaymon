@@ -1,8 +1,4 @@
-#include "mod_battle.hpp"
-#include "mod_okaymon.hpp"
-#include "mod_raylib.hpp"
-#include "mod_moves.hpp"
-#include "mod_world.hpp"
+#include "mod.hpp"
 
 namespace Okay {
 
@@ -19,6 +15,7 @@ int Entry
 
         ModuleDef_StaticInitializer(ModBattle),
         ModuleDef_StaticInitializer(ModWorld),
+        ModuleDef_StaticInitializer(ModMessages),
     };
 
     ModulesInit(defs);

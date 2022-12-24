@@ -7,6 +7,7 @@ link_directories("/opt/homebrew/lib")
 include_directories("/opt/homebrew/include")
 
 include_directories(PUBLIC ".")
+include_directories(PUBLIC "tps")
 
 add_subdirectory(utils)
 add_subdirectory(game)

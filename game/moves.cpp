@@ -1,6 +1,7 @@
 #include "moves.hpp"
 #include "okaymon.hpp"
 #include <utils/misc.hpp>
+#include <utils/modules.hpp>
 
 namespace Okay {
 
@@ -8,7 +9,8 @@ void Move::Activate
 (Okaymon& self, Okaymon& other)
 {
     if (GetRandomUniform() > accuracy) {
-        TraceLog(LOG_INFO, "%s used %s! Attack missed!",
+        ModulesNexusPublish("ModMessages.Notify",
+            "%s used %s! Attack missed!",
             self.name, name);
         return;
     }
@@ -16,12 +18,14 @@ void Move::Activate
     const int damage = (int)(self.attack * power / other.defense);
     other.health -= damage;
 
-    TraceLog(LOG_INFO, "%s used %s! %s took %d damage!",
+    ModulesNexusPublish("ModMessages.Notify",
+        "%s used %s! %s took %d damage!",
         self.name, name, other.name, damage);
     
     if (other.health <= 0) {
         other.health = 0;
-        TraceLog(LOG_INFO, "%s fainted!", other.name);
+        ModulesNexusPublish("ModMessages.Notify",
+            "%s fainted!", other.name);
     }
 }
 

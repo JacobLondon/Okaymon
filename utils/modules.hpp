@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include "eventloop.hpp"
+#include "nexus.hpp"
 #include "misc.hpp"
 
 namespace Okay {
@@ -29,7 +30,6 @@ void ModulesCleanup();
 
 void ModulesRequestStop();
 
-Eventloop *ModulesGetEventloop();
 bool ModulesLoaded(const char *name);
 void ModulesSlotsInsert(const char *name, void *data, void (* dealloc)(void *));
 void *ModulesSlotsGet(const char *name);
@@ -38,7 +38,12 @@ void *ModulesSlotsGetRequired(const char *name);
 void ModulesPause(const char *name);
 void ModulesResume(const char *name);
 
-void ModulesSubscribe(const char *name, Okay::EventCb cb, void *client, size_t milliseconds);
-void ModulesUnsubscribe(const char *name);
+void ModulesTimeoutSubscribe(const char *name, EventCb cb, void *client, size_t milliseconds);
+void ModulesTimeoutUnsubscribe(const char *name);
+
+void ModulesNexusSubscribe(const char *name, NexusCb cb);
+void ModulesNexusUnsubscribe(const char *name);
+void ModulesNexusPublish(const char *name, void *data);
+void ModulesNexusPublish(const char *name, const char *fmt, ...);
 
 }

@@ -1,4 +1,4 @@
-#include "mod_moves.hpp"
+#include "mod.hpp"
 #include "moves.hpp"
 
 namespace Okay {
