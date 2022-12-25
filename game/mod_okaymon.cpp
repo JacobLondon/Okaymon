@@ -34,7 +34,10 @@ void ModOkaymon::init()
 
     for (size_t i = 0; i < ARRAY_SIZE(defs); i++) {
         Okaymon *m = new Okaymon(defs[i]);
-        ModulesSlotsInsert(defs[i].name, m, NULL);
+        ModulesSlotsInsert(defs[i].name, m, [](void *_a){
+            auto a = (Okaymon *)_a;
+            delete a;
+        });
     }
 }
 
