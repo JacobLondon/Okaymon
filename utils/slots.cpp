@@ -19,6 +19,15 @@ void Slots::Insert
 {
     Assert(name != NULL);
     Slot slot{name, data, dealloc};
+    auto got = slots.find(name);
+    if (got == slots.end()) {
+        slots.emplace(name, slot);
+        return;
+    }
+
+    if (got->second.dealloc) {
+        got->second.dealloc(got->second.data);
+    }
     slots.insert_or_assign(name, slot);
 }
 

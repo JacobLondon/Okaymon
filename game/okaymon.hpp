@@ -29,6 +29,7 @@ struct Okaymon {
     std::array<Move *, 4> moves;
 
     Okaymon();
+    Okaymon(Okaymon& m);
     Okaymon(OkaymonDef& def);
     void Draw(float x, float y);
 };

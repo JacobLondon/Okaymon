@@ -16,6 +16,20 @@ autoscale(0),
 moves{}
 {}
 
+Okaymon::Okaymon(Okaymon& m):
+name(m.name),
+attack(m.attack),
+attackmax(m.attackmax),
+defense(m.defense),
+defensemax(m.defensemax),
+health(m.health),
+healthmax(m.healthmax),
+texture(m.texture),
+autoscale(m.autoscale),
+moves(m.moves)
+{
+}
+
 Okaymon::Okaymon
 (OkaymonDef& def):
 name(def.name),
