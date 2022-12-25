@@ -91,6 +91,10 @@ static void update
             state++;
         }
 
+        if (IsKeyPressed(KEY_SPACE)) {
+            state++;
+        }
+
         write_now();
         break;
     }

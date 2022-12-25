@@ -19,8 +19,11 @@ struct OkaymonDef {
 struct Okaymon {
     const char *name;
     float attack;
+    float attackmax;
     float defense;
+    float defensemax;
     float health;
+    float healthmax;
     Texture2D *texture;
     float autoscale;
     std::array<Move *, 4> moves;

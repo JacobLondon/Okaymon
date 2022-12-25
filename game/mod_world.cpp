@@ -30,7 +30,7 @@ static void begin_encounter()
 }
 
 static void update
-(Okay::Event &e, void *client)
+(Event &e, void *client)
 {
     (void)e;
     (void)client;

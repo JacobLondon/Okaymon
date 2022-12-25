@@ -6,8 +6,11 @@ namespace Okay {
 Okaymon::Okaymon():
 name(""),
 attack(0),
+attackmax(0),
 defense(0),
+defensemax(0),
 health(0),
+healthmax(0),
 texture(nullptr),
 autoscale(0),
 moves{}
@@ -17,8 +20,11 @@ Okaymon::Okaymon
 (OkaymonDef& def):
 name(def.name),
 attack(def.attack),
+attackmax(def.attack),
 defense(def.defense),
+defensemax(def.defense),
 health(def.health),
+healthmax(def.health),
 texture(nullptr),
 autoscale(1.0f),
 moves{}

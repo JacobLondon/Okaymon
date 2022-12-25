@@ -5,7 +5,7 @@
 namespace Okay {
 
 #define MAX_MESSAGE 1024
-#define MAX_LINE 32
+#define MAX_LINE 64
 #define MILLIS_PER_CHAR 50
 
 Writer::Writer():
